@@ -73,18 +73,19 @@ int main(){
 		cin>>ch;
 		if(ch == 't'){
 			//switch to topic  mode
-
-
-
-
+			scanf("%d",&res);
+			scanf("%f%f",&x-co,&y-co);
 			}
 		else{
 			//switch to questions mode
-
-
-
-
+			 scanf("%d",&res);
+                         scanf("%f%f",&x-co,&y-co);
 			}
+		}
+
+
+	return 0;
+	}
 	
 
 		

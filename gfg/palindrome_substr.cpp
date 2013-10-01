@@ -2,7 +2,9 @@
 Longest palindromic substring (DP approach)
 time complexity :- O(n^2)
 space complexity:- O(n^2)
+
 @Author : rohit
+@source: geeksforgeeks
 */
 
 #include <iostream>
@@ -21,7 +23,7 @@ using namespace std;
 string palindrome(string s){
 	int n = s.length();
 	bool l[1000][1000]={false};
-	int maxlen=1;
+	int maxlen=1; 
 	int start;
 
 	for(int i=0;i<n;i++)
