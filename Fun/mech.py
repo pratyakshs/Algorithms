@@ -1,10 +1,27 @@
+if exists("loaded_related")
+finish
+endif
+let loaded_related = 1
+function! s:HR(arg1)
+python <<EOF
 # Required headers for mechanize in python
+import vim
+import requests
+import json
 import mechanize
 from mechanize import Browser
 import cookielib
 import time
 from bs4 import BeautifulSoup
 base_url = "http://www.spoj.com"
+submit_key = "/submit/"
+status_key = "/status/"
+errors = ["accepted","time limit exceeded","wrong answer","compilation error","runtime error"]
+languages ={"c":11,"cpp":41,"java":10,"cs":27,"php":29,"ruby":17,
+			"python":4,"perl":3,"haskell":21,"clojure":111,"scala":39,"bash":28,
+			"erlang":36,"go":114}
+user_name = 'rohspeed'
+passwd    = '8885376049'
 # Browser
 br = mechanize.Browser()
 
@@ -31,37 +48,41 @@ br.set_handle_refresh(mechanize._http.HTTPRefreshProcessor(), max_time=1)
 br.addheaders = [('User-agent', 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.1) Gecko/2008071615 Fedora/3.0.1-1.fc9 Firefox/3.0.1')]
 # End Headers
 
+var1 = vim.eval("a:arg1")
+vim.command("let a:current_filepath = expand('%:p')")
+var2 = vim.eval("a:current_filepath")
+print "params was" , var2, var1
+
+vim.command("let a:current_filetype = &filetype")
+var3 = vim.eval("a:current_filetype")
+print var3
+
+
 # MAIN CODE STARTS HERE
-''' Cases i have to handle:
-	1) accepted
-	2) wrong answer
-	3) time limit exceeded
-	4) compilation error (specifing the message also)
-	5) runtime error
-'''
-
-
-r = br.open("http://www.spoj.com/submit/ABCDEF/")
+url = base_url + submit_key + var1
+print url
+r = br.open(url)
 for f in br.forms():
-    print "gekko"
+	print "gekko"
     print f
 br.select_form(nr=0)
-br.form['login_user']='rohspeed'
-br.form['password'] = '8885376049'
+br.form['login_user'] = user_name
+br.form['password']   = passwd
 br.submit()
 
 br.select_form(nr=0)
-src = open("/home/infinity/Algo/spoj/abcdef.cpp","r").read()
+src = open(var2,"r").read()
 #print src 
 br.form['file'] = src
-br.form['lang'] = ['41']
-br.form['problemcode'] = 'ABCDEF'
+lst = []
+lst.append(str(languages[var3]))
+br.form['lang'] = lst
+br.form['problemcode'] = var1
 br.submit()
 
-errors = ["accepted","time limit exceeded","wrong answer","compilation error","runtime error"]
-
 while True:
-	url = "http://www.spoj.com/status/ABCDEF,rohspeed/"
+	url = base_url + status_key + var1 + "," + user_name
+	print url
 	page = br.open(url)
 
 	html = page.read()
@@ -131,3 +152,8 @@ while True:
 
 	if flag2 == 1:
 		break
+
+EOF
+endfunction
+command! -nargs=1 Hr call s:HR(<f-args>)
+

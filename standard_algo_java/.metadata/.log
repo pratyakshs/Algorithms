@@ -188,3 +188,12 @@ Java Model Exception: Java Model Status [ImmutableList {key=LImmutableList;} [in
 	at org.eclipse.jface.text.TextViewerHoverManager$4.run(TextViewerHoverManager.java:166)
 !SUBENTRY 1 org.eclipse.jdt.core 4 969 2013-08-18 18:09:43.640
 !MESSAGE ImmutableList {key=LImmutableList;} [in [Working copy] PersistentQueue.java [in jp.co.wap.exam [in src [in wap]]]] does not exist
+!SESSION 2014-01-02 18:51:44.675 -----------------------------------------------
+eclipse.buildId=I20120502-2000
+java.version=1.7.0_25
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY org.eclipse.core.resources 2 10035 2014-01-02 18:52:07.802
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
