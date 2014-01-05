@@ -2,7 +2,6 @@
 User Based collaberative Filtering
 @Author: Rohit
 '''
-
 import math
 import random
 from pydelicious import get_popular,get_urlposts,get_userposts
